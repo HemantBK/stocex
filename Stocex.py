@@ -9,6 +9,18 @@ Original file is located at
 ## **Stocex project ipynb file.**
 """
 
+import spacy
+import subprocess
+import importlib.util
+
+# Ensure en_core_web_sm is installed
+try:
+    nlp = spacy.load("en_core_web_sm")
+except OSError:
+    subprocess.run(["python", "-m", "spacy", "download", "en_core_web_sm"])
+    nlp = spacy.load("en_core_web_sm")
+
+
 # Necessary libraries
 #!pip install yfinance
 #!pip install newspaper3k

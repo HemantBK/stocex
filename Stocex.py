@@ -298,8 +298,11 @@ shutil.copytree("historical_price_data", "stocex_data/historical_price_data", di
 shutil.make_archive("stocex_data", 'zip', "stocex_data")
 
 # ✅ Provide download link
-from google.colab import files
-files.download("stocex_data.zip")
+if "google.colab" in sys.modules:
+    from google.colab import files
+    files.download("stocex_data.zip")
+else:
+    print("Running outside Google Colab — skipping download.")
 
 print(historical_price_data.keys())
 

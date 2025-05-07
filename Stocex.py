@@ -10,15 +10,8 @@ Original file is located at
 """
 
 import spacy
-import subprocess
-import importlib.util
+nlp = spacy.load("en_core_web_sm")
 
-# Ensure en_core_web_sm is installed
-try:
-    nlp = spacy.load("en_core_web_sm")
-except OSError:
-    subprocess.run(["python", "-m", "spacy", "download", "en_core_web_sm"])
-    nlp = spacy.load("en_core_web_sm")
 
 
 # Necessary libraries

@@ -554,13 +554,17 @@ def extract_price_windows(price_df, event_dates, window=(-3, 5)):
 
     return pd.DataFrame(matrix)
 
+#edit from here
+import matplotlib.pyplot as plt
+import streamlit as st
+
 def plot_superposed_epoch(matrix, window=(-3, 5)):
     mean_pattern = matrix.mean(axis=0)
     rel_days = list(range(window[0], window[1] + 1))
 
     if len(mean_pattern) != len(rel_days):
-        print(f"❌ Dimension mismatch: mean_pattern={len(mean_pattern)}, rel_days={len(rel_days)}")
-        st.error("Plot failed: x and y dimensions do not match.")
+        print(f"[❌ Mismatch] rel_days: {len(rel_days)}, mean_pattern: {len(mean_pattern)}")
+        st.error("Plot failed: Number of days and mean values don't match.")
         return
 
     plt.figure(figsize=(10, 5))
@@ -571,7 +575,8 @@ def plot_superposed_epoch(matrix, window=(-3, 5)):
     plt.title("Superposed Epoch Analysis (Sentiment-Driven)")
     plt.legend()
     plt.grid(True)
-    st.pyplot(plt.gcf())  # Use Streamlit-compatible display
+    st.pyplot(plt.gcf())
+
 
 
 # Add fake dates to your current sentiment_df

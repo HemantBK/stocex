@@ -323,9 +323,9 @@ for ticker, df in historical_data.items():
 
 
 # ✅ INSTALL (if not done)
-#!pip install nixtla --quiet
-#!pip install utilsforecast --quiet
-#!pip install yfinance matplotlib --quiet
+# !pip install nixtla --quiet
+# !pip install utilsforecast --quiet
+# !pip install yfinance matplotlib --quiet
 
 # ✅ IMPORTS
 import yfinance as yf

@@ -554,10 +554,14 @@ def extract_price_windows(price_df, event_dates, window=(-3, 5)):
 
     return pd.DataFrame(matrix)
 
-# STEP 4: Plot SEA result
 def plot_superposed_epoch(matrix, window=(-3, 5)):
-    mean_pattern = matrix.mean()
+    mean_pattern = matrix.mean(axis=0)
     rel_days = list(range(window[0], window[1] + 1))
+
+    if len(mean_pattern) != len(rel_days):
+        print(f"❌ Dimension mismatch: mean_pattern={len(mean_pattern)}, rel_days={len(rel_days)}")
+        st.error("Plot failed: x and y dimensions do not match.")
+        return
 
     plt.figure(figsize=(10, 5))
     plt.plot(rel_days, mean_pattern, marker="o", label="Average Price Movement")
@@ -567,7 +571,8 @@ def plot_superposed_epoch(matrix, window=(-3, 5)):
     plt.title("Superposed Epoch Analysis (Sentiment-Driven)")
     plt.legend()
     plt.grid(True)
-    plt.show()
+    st.pyplot(plt.gcf())  # Use Streamlit-compatible display
+
 
 # Add fake dates to your current sentiment_df
 sentiment_df["Date"] = [datetime.today().date() - timedelta(days=i) for i in range(len(sentiment_df))]
